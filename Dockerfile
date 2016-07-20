@@ -1,4 +1,4 @@
-FROM 1000kit/jboss-eap:6.4.8
+FROM 1000kit/jboss-eap:6.4.9
 
 MAINTAINER Dr. Stefan Tausendpfund <docker@1000kit.org>
 
