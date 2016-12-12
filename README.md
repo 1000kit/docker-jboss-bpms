@@ -7,7 +7,7 @@ This repository contains `JBoss BPM Suite 6.3.0` image.
 ### Installed versions:
 
  JBoss BPM Suite 6.4.0
- 
+
  Dependency to JBoss EAP 7.0.3
 
 ### Availability
