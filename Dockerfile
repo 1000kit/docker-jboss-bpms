@@ -1,4 +1,4 @@
-FROM 1000kit/jboss-eap:6.4.8
+FROM 1000kit/jboss-eap:7.0.3
 
 MAINTAINER Dr. Stefan Tausendpfund <docker@1000kit.org>
 
@@ -6,26 +6,17 @@ LABEL Vendor="1000kit"
 LABEL License=GPLv3
 LABEL Version=1.0.0
 
-ENV BPMS_BASE  6.3.0.GA
-
-USER root
-
-ADD ./install/jboss-bpmsuite-${BPMS_BASE}-deployable-eap6.x.zip /tmp/     
-
-# define the deployments directory as a volume that can be mounted
-#VOLUME ["/opt/jboss/standalone/configuration",\
-#       "/opt/jboss/standalone/log", \
-#       "/opt/jboss/standalone/deployments"]
-       
-RUN /usr/bin/unzip -o /tmp/jboss-bpmsuite-${BPMS_BASE}-deployable-eap6.x.zip -d ${JBOSS_BASE}/ \
-    && chown -R jboss:jboss ${JBOSS_HOME}/ \
-    && /bin/rm /tmp/jboss-bpmsuite*.zip
- 
-# Ensure signals are forwarded to the JVM process correctly for graceful shutdown
-#ENV LAUNCH_JBOSS_IN_BACKGROUND true
-
+ENV BPMS_BASE=6.4.0.GA
 
 USER jboss
+
+ARG BPMS_DOWNLOAD_URL
+
+RUN echo "BPMS: ${BPMS_DOWNLOAD_URL}/jboss-bpmsuite-${BPMS_BASE}-deployable-eap7.x.zip" \   
+    && curl -L ${BPMS_DOWNLOAD_URL}/jboss-bpmsuite-${BPMS_BASE}-deployable-eap7.x.zip > /tmp/jboss-bpmsuite-${BPMS_BASE}-deployable-eap7.x.zip \
+
+    && /usr/bin/unzip -oq /tmp/jboss-bpmsuite-${BPMS_BASE}-deployable-eap7.x.zip -d ${JBOSS_BASE}/ \
+    && /bin/rm /tmp/jboss-bpmsuite*.zip
 
 
 #CMD /opt/jboss/server/jboss/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
