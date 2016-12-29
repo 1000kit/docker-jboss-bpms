@@ -2,9 +2,9 @@ FROM 1000kit/jboss-eap:7.0.3
 
 MAINTAINER Dr. Stefan Tausendpfund <docker@1000kit.org>
 
-LABEL Vendor="1000kit"
-LABEL License=GPLv3
-LABEL Version=1.0.0
+LABEL Vendor="1000kit" \
+      License=GPLv3 \
+      Version=1.0.0
 
 ENV BPMS_BASE=6.4.0.GA
 
